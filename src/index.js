@@ -7,4 +7,4 @@ app.use(express.json());
 
 app.use('/api/v1', router);
 
-module.exports = app; 
+module.exports = app;

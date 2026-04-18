@@ -1,5 +1,5 @@
 const db = require('../config/databaseConnect');
-const {Logger} = require('../config/validateEnvironment');
+const { Logger } = require('../config/validateEnvironment');
 
 const runMigrations = async () => {
   const queryText = `
@@ -82,11 +82,11 @@ const runMigrations = async () => {
 
   try {
     await db.query(queryText);
-    Logger.info("✅ Migrations executadas com sucesso!");
+    Logger.info('✅ Migrations executadas com sucesso!');
     process.exit(0);
   } catch (err) {
     await db.query('ROLLBACK;');
-    Logger.error("❌ Erro ao rodar migrations:", err);
+    Logger.error('❌ Erro ao rodar migrations:', err);
     process.exit(1);
   }
 };
