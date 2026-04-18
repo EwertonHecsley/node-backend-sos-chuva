@@ -21,14 +21,14 @@ const HelpRequestModel = {
 
   async findAll(page = 1, limit = 10) {
     const queryText = `
-        SELECT 
-          pa.id, pa.need_user_id as "needUserId", pa.volunteer_id as "volunteerId", 
+        SELECT
+          pa.id, pa.need_user_id as "needUserId", pa.volunteer_id as "volunteerId",
           pa.message, pa.status, pa.created_at as "createdAt",
           u.name as "volunteerName"
         FROM pedidos_ajuda pa
         JOIN voluntarios v ON pa.volunteer_id = v.id
         JOIN usuarios u ON v.user_id = u.id
-        ORDER BY pa.created_at DESC 
+        ORDER BY pa.created_at DESC
         LIMIT $1 OFFSET $2;
     `;
     try {
@@ -42,8 +42,8 @@ const HelpRequestModel = {
 
   async findById(id) {
     const queryText = `
-        SELECT 
-          pa.id, pa.need_user_id as "needUserId", pa.volunteer_id as "volunteerId", 
+        SELECT
+          pa.id, pa.need_user_id as "needUserId", pa.volunteer_id as "volunteerId",
           pa.message, pa.status, pa.created_at as "createdAt",
           u.name as "volunteerName"
         FROM pedidos_ajuda pa
@@ -62,8 +62,8 @@ const HelpRequestModel = {
 
   async findByNeedUserId(needUserId) {
     const queryText = `
-        SELECT 
-          pa.id, pa.need_user_id as "needUserId", pa.volunteer_id as "volunteerId", 
+        SELECT
+          pa.id, pa.need_user_id as "needUserId", pa.volunteer_id as "volunteerId",
           pa.message, pa.status, pa.created_at as "createdAt",
           u.name as "volunteerName"
         FROM pedidos_ajuda pa
@@ -84,7 +84,7 @@ const HelpRequestModel = {
 
   async update(id, status) {
     const queryText = `
-        UPDATE pedidos_ajuda 
+        UPDATE pedidos_ajuda
         SET status = $1
         WHERE id = $2
         RETURNING id, need_user_id as "needUserId", volunteer_id as "volunteerId", message, status, created_at as "createdAt";

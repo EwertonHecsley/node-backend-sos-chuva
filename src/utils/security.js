@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const Security = {
-  // Argon2 Hashing
   async hashPassword(password) {
     try {
       return await argon2.hash(password);
@@ -21,7 +20,6 @@ const Security = {
     }
   },
 
-  // JWT Tokens
   generateToken(payload) {
     return jwt.sign(payload, JWT_SECRET, { expiresIn: '30m' });
   },

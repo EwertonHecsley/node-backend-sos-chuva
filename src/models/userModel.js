@@ -34,9 +34,9 @@ const UserModel = {
 
   async findAll(page = 1, limit = 10) {
     const queryText = `
-        SELECT id, name, email, phone, type, location, created_at 
-        FROM usuarios 
-        ORDER BY created_at DESC 
+        SELECT id, name, email, phone, type, location, created_at
+        FROM usuarios
+        ORDER BY created_at DESC
         LIMIT $1 OFFSET $2;
     `;
     try {
@@ -50,8 +50,8 @@ const UserModel = {
 
   async findById(id) {
     const queryText = `
-        SELECT id, name, email, phone, type, location, created_at 
-        FROM usuarios 
+        SELECT id, name, email, phone, type, location, created_at
+        FROM usuarios
         WHERE id = $1;
     `;
     try {
@@ -66,7 +66,7 @@ const UserModel = {
   async update(id, data) {
     const { name, email, phone, type, location } = data;
     const queryText = `
-        UPDATE usuarios 
+        UPDATE usuarios
         SET name = $1, email = $2, phone = $3, type = $4, location = $5
         WHERE id = $6
         RETURNING id, name, email, phone, type, location, created_at;
@@ -109,8 +109,8 @@ const UserModel = {
 
   async search(query) {
     const queryText = `
-        SELECT id, name, email, phone, type, location, created_at 
-        FROM usuarios 
+        SELECT id, name, email, phone, type, location, created_at
+        FROM usuarios
         WHERE name ILIKE $1 OR email ILIKE $1;
     `;
     try {

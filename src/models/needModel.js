@@ -20,7 +20,7 @@ const NeedModel = {
 
   async findAll(page = 1, limit = 10) {
     const query = `
-      SELECT 
+      SELECT
         n.id,
         n.category,
         n.description,
@@ -34,13 +34,13 @@ const NeedModel = {
         u.phone as "userPhone"
       FROM necessidades n
       JOIN usuarios u ON n.user_id = u.id
-      ORDER BY 
-        CASE 
+      ORDER BY
+        CASE
           WHEN n.urgency = 'critical' THEN 1
           WHEN n.urgency = 'high' THEN 2
           WHEN n.urgency = 'medium' THEN 3
           ELSE 4
-        END, 
+        END,
         n.created_at DESC
       LIMIT $1 OFFSET $2;
     `;
@@ -56,7 +56,7 @@ const NeedModel = {
   async update(id, data) {
     const { status, volunteerId, category, description, urgency } = data;
     const queryText = `
-      UPDATE necessidades 
+      UPDATE necessidades
       SET status = COALESCE($1, status),
           volunteer_id = COALESCE($2, volunteer_id),
           category = COALESCE($3, category),
@@ -77,7 +77,7 @@ const NeedModel = {
 
   async delete(id) {
     const queryText = `
-      DELETE FROM necessidades 
+      DELETE FROM necessidades
       WHERE id = $1;
     `;
     try {
@@ -91,7 +91,7 @@ const NeedModel = {
 
   async findById(id) {
     const query = `
-      SELECT 
+      SELECT
         n.id,
         n.category,
         n.description,
@@ -131,7 +131,7 @@ const NeedModel = {
 
   async search(query) {
     const queryText = `
-      SELECT 
+      SELECT
         n.id, n.category, n.description, n.urgency, n.status, n.created_at as "createdAt",
         u.name as "userName", u.location as "userLocation"
       FROM necessidades n

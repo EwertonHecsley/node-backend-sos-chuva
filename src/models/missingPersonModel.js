@@ -39,14 +39,14 @@ const MissingPersonModel = {
 
   async findAll(page = 1, limit = 10) {
     const queryText = `
-        SELECT 
-          d.id, d.reported_by as "reportedBy", d.name, d.age, d.type, d.description, 
-          d.last_seen_location as "lastSeenLocation", d.last_seen_date as "lastSeenDate", 
+        SELECT
+          d.id, d.reported_by as "reportedBy", d.name, d.age, d.type, d.description,
+          d.last_seen_location as "lastSeenLocation", d.last_seen_date as "lastSeenDate",
           d.photo_url as "photoUrl", d.status, d.created_at as "createdAt",
           u.phone as "reporterPhone"
         FROM desaparecidos d
         JOIN usuarios u ON d.reported_by = u.id
-        ORDER BY d.created_at DESC 
+        ORDER BY d.created_at DESC
         LIMIT $1 OFFSET $2;
     `;
     try {
@@ -60,9 +60,9 @@ const MissingPersonModel = {
 
   async findById(id) {
     const queryText = `
-        SELECT 
-          d.id, d.reported_by as "reportedBy", d.name, d.age, d.type, d.description, 
-          d.last_seen_location as "lastSeenLocation", d.last_seen_date as "lastSeenDate", 
+        SELECT
+          d.id, d.reported_by as "reportedBy", d.name, d.age, d.type, d.description,
+          d.last_seen_location as "lastSeenLocation", d.last_seen_date as "lastSeenDate",
           d.photo_url as "photoUrl", d.status, d.created_at as "createdAt",
           u.phone as "reporterPhone"
         FROM desaparecidos d
@@ -92,8 +92,8 @@ const MissingPersonModel = {
       status,
     } = data;
     const queryText = `
-        UPDATE desaparecidos 
-        SET name = COALESCE($1, name), 
+        UPDATE desaparecidos
+        SET name = COALESCE($1, name),
             age = COALESCE($2, age),
             type = COALESCE($3, type),
             description = COALESCE($4, description),
@@ -154,8 +154,8 @@ const MissingPersonModel = {
 
   async search(query) {
     const queryText = `
-        SELECT 
-          d.id, d.name, d.type, d.description, d.last_seen_location as "lastSeenLocation", 
+        SELECT
+          d.id, d.name, d.type, d.description, d.last_seen_location as "lastSeenLocation",
           d.status, d.created_at as "createdAt"
         FROM desaparecidos d
         WHERE d.name ILIKE $1 OR d.description ILIKE $1 OR d.last_seen_location ILIKE $1;

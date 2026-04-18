@@ -21,7 +21,7 @@ const VolunteerModel = {
 
   async findByUserId(userId) {
     const queryText = `
-        SELECT 
+        SELECT
           v.id, v.user_id as "userId", v.skills, v.availability, v.status, v.helped_count as "helpedCount",
           u.name, u.location, u.phone
         FROM voluntarios v
@@ -39,12 +39,12 @@ const VolunteerModel = {
 
   async findAll(page = 1, limit = 10) {
     const queryText = `
-        SELECT 
+        SELECT
           v.id, v.user_id as "userId", v.skills, v.availability, v.status, v.helped_count as "helpedCount",
           u.name, u.location, u.phone
         FROM voluntarios v
         JOIN usuarios u ON v.user_id = u.id
-        ORDER BY v.helped_count DESC, u.name ASC 
+        ORDER BY v.helped_count DESC, u.name ASC
         LIMIT $1 OFFSET $2;
     `;
     try {
@@ -58,7 +58,7 @@ const VolunteerModel = {
 
   async findById(id) {
     const queryText = `
-        SELECT 
+        SELECT
           v.id, v.user_id as "userId", v.skills, v.availability, v.status, v.helped_count as "helpedCount",
           u.name, u.location, u.phone
         FROM voluntarios v
@@ -77,8 +77,8 @@ const VolunteerModel = {
   async update(id, data) {
     const { skills, availability, status, helpedCount } = data;
     const queryText = `
-        UPDATE voluntarios 
-        SET skills = COALESCE($1, skills), 
+        UPDATE voluntarios
+        SET skills = COALESCE($1, skills),
             availability = COALESCE($2, availability),
             status = COALESCE($3, status),
             helped_count = COALESCE($4, helped_count)
@@ -123,7 +123,7 @@ const VolunteerModel = {
 
   async search(query) {
     const queryText = `
-        SELECT 
+        SELECT
           v.id, v.user_id as "userId", v.skills, v.availability, v.status, v.helped_count as "helpedCount",
           u.name, u.location, u.phone
         FROM voluntarios v
